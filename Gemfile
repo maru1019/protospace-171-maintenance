@@ -75,7 +75,7 @@ group :development do
   gem 'rubocop', require: false
 end
 
-
+gem 'pry-rails'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'devise'
