@@ -16,6 +16,10 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.new
   end
 
+  def show
+    @prototype = Prototype.find(params[:id])
+  end
+
   private
   def prototype_params
     # ユーザー管理機能と統合した際にユーザーIDをmargeするコードを追加する(コードの内容が正しいのかは確認すること)
