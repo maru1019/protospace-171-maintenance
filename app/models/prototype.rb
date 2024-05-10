@@ -1,4 +1,6 @@
 class Prototype < ApplicationRecord
+  #ユーザー管理機能と統合した際に下記をコメントアウト
+  #belongs_to :user
   has_one_attached :image
 
   validates :title, presence: true
