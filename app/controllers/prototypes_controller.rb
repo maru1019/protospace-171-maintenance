@@ -4,11 +4,22 @@ class PrototypesController < ApplicationController
   end
 
   def create
-    Prototype.create
+    @prototype = Prototype.new(prototype_params)
+    if @prototype.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def new
     @prototype = Prototype.new
+  end
+
+  private
+  def prototype_params
+    # ユーザー管理機能と統合した際にユーザーIDをmargeするコードを追加する(コードの内容が正しいのかは確認すること)
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :image) #.merge(user_id: current_user.id)
   end
 
 end
