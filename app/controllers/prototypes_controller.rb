@@ -1,4 +1,5 @@
 class PrototypesController < ApplicationController
+
   before_action :move_to_index, except: [:index, :show, :edit]
   before_action :move_to_signed_in, only: :edit
 
@@ -16,7 +17,11 @@ class PrototypesController < ApplicationController
   end
 
   def new
-    @prototype = Prototype.new
+    if user_signed_in?
+      @prototype = Prototype.new
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -43,6 +48,7 @@ class PrototypesController < ApplicationController
   end
 
   private
+
   def prototype_params
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
