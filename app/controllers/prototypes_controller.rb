@@ -13,7 +13,11 @@ class PrototypesController < ApplicationController
   end
 
   def new
-    @prototype = Prototype.new
+    if user_signed_in?
+      @prototype = Prototype.new
+    else
+      redirect_to root_path
+    end
   end
 
   def show
