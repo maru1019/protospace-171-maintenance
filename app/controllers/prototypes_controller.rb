@@ -1,7 +1,7 @@
 class PrototypesController < ApplicationController
 
   before_action :move_to_index, except: [:index, :show, :edit]
-  before_action :move_to_signed_in, only: :edit
+  before_action :move_to_signed_in, only: [:edit, :destroy]
 
   def index
     @prototypes = Prototype.includes(:user)
@@ -45,6 +45,12 @@ class PrototypesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    prototype = Prototype.find(params[:id])
+    prototype.destroy
+    redirect_to root_path
   end
 
   private
