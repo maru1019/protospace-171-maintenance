@@ -31,7 +31,6 @@
         </div>
       </div>
       <div class="prototype__comments">
-        <%# ログインしているユーザーには以下のコメント投稿フォームを表示する %>
           <% if user_signed_in? %>
             <%= form_with model: [@prototype, @comment],local: true do |f|%>
               <div class="field">
@@ -43,14 +42,13 @@
               </div>
             <% end %>
           <% end %>
-        <%# // ログインしているユーザーには上記を表示する %>
         <ul class="comments_lists">
-          <%# 投稿に紐づくコメントを一覧する処理を記述する %>
             <li class="comments_list">
-              <%# <%= " コメントのテキスト "%>
-              <%# <%= link_to "（ ユーザー名 ）", user_path(current_user.id), class: :comment_user %>
+              <% @comments.each do |comment| %>
+               <%= comment.content %>
+               <%= link_to comment.user.name, root_path, class: :comment_user %>
+              <% end %>
             </li>
-          <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
         </ul>
       </div>
     </div>
